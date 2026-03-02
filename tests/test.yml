@@ -1,6 +1,10 @@
-#SPDX-License-Identifier: MIT-0
----
+# Playbook to run Docker install role
+#
+# Example command
+# ansible-playbook ansible-role-docker/tests/test.yml
+
 - hosts: localhost
-  remote_user: root
+  connection: local
+  become: true
   roles:
-    - docker
+   - ansible-role-docker
