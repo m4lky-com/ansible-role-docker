@@ -1,7 +1,6 @@
 galaxy_info:
   namespace: m4lky
-  version: 1.0.0
-  role_name: docker
+  role_name: ansible-role-docker
   description: Docker Engine installation role
   min_ansible_version: "2.12"
 
@@ -10,5 +9,9 @@ galaxy_info:
       versions:
         - jammy
         - focal
+
+  galaxy_tags:
+   - docker
+   - containers
 
 dependencies: []
