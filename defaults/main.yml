@@ -19,3 +19,13 @@ docker_packages:
 docker_package_state: present
 docker_service_state: started
 docker_service_enabled: true
+
+docker_volume_directories:
+  - /home/malcolm/docker-volumes/jenkins
+  - /home/malcolm/docker-volumes/transmission/config 
+  - /home/malcolm/docker-volumes/transmission/watch
+  - /home/malcolm/docker-volumes/nginx/rproxy
+  - /home/malcolm/docker-volumes/portainer
+  - /home/malcolm/docker-volumes/unifi-mongodb/data
+  - /home/malcolm/docker-volumes/unifi-mongodb/init
+  - /home/malcolm/docker-volumes/unifi-network-appliance

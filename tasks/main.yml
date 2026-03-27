@@ -51,7 +51,40 @@
     enabled: "{{ docker_service_enabled }}"
 
 - name: Add malcolm user account to Docker group
-  user:
+  ansible.builtin.user:
     name: malcolm
     groups: docker
     append: yes
+
+- name: Add directories for docker volumes
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: malcolm
+    group: malcolm
+    mode: "0755"
+  loop: "{{ docker_volume_directories }}"
+
+- name: Download nginx reverse proxy files from S3
+  amazon.aws.aws_s3:
+    bucket: docker-volumes-663468155566-eu-west-1-an
+    object: nginx/rproxy/
+    dest: /home/malcolm/docker-volumes/nginx/rproxy/
+    mode: get
+    recursive: yes
+  register: s3_download
+
+- name: Ensure correct ownership on downloaded files
+  ansible.builtin.file:
+    path: /home/malcolm/docker-volumes/nginx/rproxy/
+    owner: malcolm
+    group: malcolm
+    recurse: yes
+
+- name: Copy init-mongo.sh with executable permissions
+  ansible.builtin.copy:
+    src: init-mongo.sh
+    dest: /home/malcolm/docker-volumes/unifi-mongodb/init/init-mongo.sh
+    owner: malcolm
+    group: malcolm
+    mode: "0755"
