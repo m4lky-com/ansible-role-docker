@@ -29,3 +29,8 @@ docker_volume_directories:
   - /home/malcolm/docker-volumes/unifi-mongodb/data
   - /home/malcolm/docker-volumes/unifi-mongodb/init
   - /home/malcolm/docker-volumes/unifi-network-appliance
+
+docker_volume_reverse_proxy_available_path: /home/malcolm/docker-volumes/nginx/rproxy/config/conf.d/sites-available
+docker_volume_reverse_proxy_enabled_path: /home/malcolm/docker-volumes/nginx/rproxy/config/conf.d/sites-enabled
+
+reverse_proxy_sites_enabled_path: /etc/nginx/conf.d/sites-enabled/
