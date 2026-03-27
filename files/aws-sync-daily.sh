@@ -1,0 +1,3 @@
+#!/bin/bash
+PATH=/usr/bin:/usr/local/bin
+aws s3 sync /home/malcolm/docker-volumes/nginx/rproxy s3://docker-volumes-663468155566-eu-west-1-an/nginx/rproxy/ --delete > /dev/null 2>1

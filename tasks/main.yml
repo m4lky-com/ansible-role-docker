@@ -107,3 +107,15 @@
     dest: "{{ docker_volume_reverse_proxy_enabled_path }}/{{ item.path | basename }}"
     state: link
   loop: "{{ available_files.files }}"
+
+# Add crontab job to backup nginx configs to S3
+
+- name: Copy backup script to /etc/cron.daily
+  ansible.builtin.copy:
+    src: aws-sync-daily.sh
+    dest: /etc/cron.daily/
+
+- name: Make script executable
+  ansible.builtin.file: 
+    dest: /etc/cron.daily/aws-sync-daily.sh 
+    mode: a+x
