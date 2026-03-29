@@ -1,0 +1,7 @@
+[Unit]
+Description=AWS Reverse Proxy Config Daily Sync
+
+[Service]
+Type=oneshot
+User=malcolm
+ExecStart=/usr/bin/aws s3 sync /home/malcolm/docker-volumes/nginx/rproxy s3://docker-volumes-663468155566-eu-west-1-an/nginx/rproxy/ --delete

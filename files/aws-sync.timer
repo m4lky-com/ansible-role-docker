@@ -1,0 +1,9 @@
+[Unit]
+Description=Run AWS Reverse Proxy Config Daily Sync
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target

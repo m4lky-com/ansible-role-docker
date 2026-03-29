@@ -110,12 +110,39 @@
 
 # Add crontab job to backup nginx configs to S3
 
-- name: Copy backup script to /etc/cron.daily
-  ansible.builtin.copy:
-    src: aws-sync-daily.sh
-    dest: /etc/cron.daily/
+# - name: Copy backup script to /etc/cron.daily
+#   ansible.builtin.copy:
+#     src: aws-sync-daily
+#     dest: /etc/cron.daily/
 
-- name: Make script executable
-  ansible.builtin.file: 
-    dest: /etc/cron.daily/aws-sync-daily.sh 
-    mode: a+x
+# - name: Make script executable
+#   ansible.builtin.file: 
+#     dest: /etc/cron.daily/aws-sync-daily.sh 
+#     mode: a+x
+
+# Use service to run backup to s3 bucket
+- name: Create aws sync systemd service
+  ansible.builtin.copy:
+    src: aws-sync.service
+    dest: /etc/systemd/system/aws-sync.service
+    owner: root
+    group: root
+    mode: '0644'
+    
+- name: Create aws sync systemd timer
+  ansible.builtin.copy:
+    src: src: aws-sync.service
+    dest: /etc/systemd/system/aws-sync.timer
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Enable and start aws sync timer
+  ansible.builtin.systemd:
+    name: aws-sync.timer
+    enabled: true
+    state: started
