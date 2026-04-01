@@ -81,7 +81,7 @@
 - name: Copy nginx certs directory
   ansible.builtin.copy:
     src: "nginx/certs/"
-    dest: "/home/malcolm/docker-volumes/nginx/rproxy/config/"
+    dest: "/home/malcolm/docker-volumes/nginx/rproxy/certs/"
     mode: '0664'
 
 - name: Deploy all nginx templates for reverse proxy
@@ -149,7 +149,7 @@
     
 - name: Create aws sync systemd timer
   ansible.builtin.copy:
-    src: src: aws-sync.service
+    src: aws-sync.timer
     dest: /etc/systemd/system/aws-sync.timer
     owner: root
     group: root

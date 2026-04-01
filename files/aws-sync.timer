@@ -4,6 +4,7 @@ Description=Run AWS Reverse Proxy Config Daily Sync
 [Timer]
 OnCalendar=daily
 Persistent=true
+Unit=aws-sync.service
 
 [Install]
-WantedBy=timers.target
+WantedBy=multi-user.target
